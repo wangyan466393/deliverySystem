@@ -1,6 +1,6 @@
 <template>
     <div>
-        我的
+        我的页面
     </div>
 </template>
 <script>
