@@ -2,7 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import MSite from '@/components/MSite'
 import Search from '@/components/Search'
-import Order from '@/components/OrderDetail'
+import Order from '@/components/Order'
 import Profile from '@/components/Profile'
 
 Vue.use(Router)

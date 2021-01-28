@@ -6,7 +6,7 @@
       style="background-color: #00a67c; color: #fff"
     >
     </van-nav-bar>
-    <div>
+    <van-sticky>
       <van-search
         v-model="value"
         show-action
@@ -17,6 +17,30 @@
           <div @click="onSearch" class="search_btn">搜索</div>
         </template>
       </van-search>
+    </van-sticky>
+    <div>
+        <van-card thumb="https://img.yzcdn.cn/vant/ipad.jpeg" v-for="v in 10" :key="v">
+        <template #title>
+          <van-tag
+            color="#FFD857"
+            text-color="black"
+            size="medium"
+            style="font-weight: 700"
+            >品牌</van-tag
+          >
+          <b class="shops_title">嘉禾一品(温都水城)</b>
+        </template>
+        <template #tags>
+          <div style="margin-top: 18px">
+            <span>月售755单</span>
+          </div>
+        </template>
+        <template #price>
+          <div>
+            <span>¥20起送/距离5.1km</span>
+          </div>
+        </template>
+      </van-card>
     </div>
   </div>
 </template>
@@ -41,6 +65,14 @@ export default {
     border-radius: 3px;
     background-color:#00a67c ;
     color: #fff;
+}
+.search_ljp .van-card {
+  background-color: #fff;
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-bottom: 13px;
+  border-bottom: 1px solid #e6e6e6;
+  font-size: 14px;
 }
 </style>
 

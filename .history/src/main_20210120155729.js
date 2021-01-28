@@ -9,18 +9,6 @@ import 'vant/lib/index.css';
 
 Vue.use(Vant);
 
-import VueAMap from 'vue-amap';
-Vue.use(VueAMap);
-// 初始化vue-amap
-VueAMap.initAMapApiLoader({
-  // 高德的key
-  key: '5ad77ea3aaf123f2257a9db2a27bd452',
-  // 插件集合
-  plugin: ['AMap.Autocomplete', 'AMap.PlaceSearch','AMap.Scale', 'AMap.OverView', 'AMap.ToolBar', 'AMap.MapType', 'AMap.Geolocation','AMap.Geocoder', 'AMap.AMapManager', 'AMap.Marker'],
-  // 高德 sdk 版本，默认为 1.4.4
-  v: '1.4.4'
-});
-
 Vue.config.productionTip = false
 
 /* eslint-disable no-new */
