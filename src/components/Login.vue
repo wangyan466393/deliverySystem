@@ -54,6 +54,10 @@
         </van-form>
       </div>
     </div>
+    <!-- 返回箭头 -->
+    <a href="javascript:" class="go_back" @click="$router.back()">
+        <van-icon name="arrow-left" size="30" color="#999"/>
+      </a>
     <!-- 错误提示弹出框 -->
     <van-notify v-model="alertShow" type="warning">
       <van-icon name="fail" style="margin-right: 4px;"/>
@@ -166,6 +170,11 @@ export default {
 .login_submit {
   background: #4cd96f;
   border: 1px solid #4cd96f;
+}
+.go_back{
+  position:absolute;
+  top:5px;
+  left:5px;
 }
 </style>
 
