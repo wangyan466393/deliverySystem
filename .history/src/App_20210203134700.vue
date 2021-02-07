@@ -20,7 +20,7 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   width: 100%;
   height: 100%;
-  padding-bottom: 50px;
+  padding-bottom: 30px;
 }
 a{
   text-decoration: none;

@@ -14,23 +14,13 @@
     </van-nav-bar>
     <template>
       <van-swipe class="my-swipe" :autoplay="3000" indicator-color="#00a67c">
-        <van-swipe-item>
+        <van-swipe-item v-for="v in 2" :key="v">
           <van-grid square :border="false">
             <van-grid-item
               v-for="(value, index) in gridData"
               :key="index"
-              icon="https://img.yzcdn.cn/vant/apple-3.jpg"
-              :text="value.text"
-            />
-          </van-grid>
-        </van-swipe-item>
-        <van-swipe-item>
-          <van-grid square :border="false">
-            <van-grid-item
-              v-for="value in 8"
-              :key="value"
-              icon="https://img.yzcdn.cn/vant/apple-3.jpg"
-              text="文字"
+              :icon="'http://47.95.13.193:80/takeOutSystem-1.0-SNAPSHOT/'+value.photo"
+              :text="value.name"
             />
           </van-grid>
         </van-swipe-item>
@@ -39,7 +29,9 @@
     <van-divider v-for="v in 2" :key="v" :class="'divider' + v" />
     <div class="shops_lists">
       <van-cell title="附近商家" icon="wap-nav" :border="false" />
-      <van-card thumb="https://img.yzcdn.cn/vant/ipad.jpeg">
+      <template v-for="(item,index) in shopsData">
+        <img :src="item.photo" alt="" :key="item">
+      <van-card :thumb="`http://47.95.13.193:80/takeOutSystem-1.0-SNAPSHOT/${item.photo}`" :key="index">
         <template #title>
           <van-tag
             color="#FFD857"
@@ -48,19 +40,19 @@
             style="font-weight: 700"
             >品牌</van-tag
           >
-          <b class="shops_title">嘉禾一品(温都水城)</b>
+          <b class="shops_title">{{ item.name }}</b>
         </template>
         <template #tags>
           <div style="margin-top: 18px">
             <van-rate
-              v-model="value"
+              v-model="item.score"
               allow-half
               color="#FF992D"
               readonly
               size="14"
             />
-            <span>4.7</span>
-            <span>月售755单</span>
+            <span>{{item.score}}</span>
+            <span>月售{{item.sales}}单</span>
           </div>
         </template>
         <template #price>
@@ -69,36 +61,8 @@
           </div>
         </template>
       </van-card>
-      <van-card thumb="https://img.yzcdn.cn/vant/ipad.jpeg">
-        <template #title>
-          <van-tag
-            color="#FFD857"
-            text-color="black"
-            size="medium"
-            style="font-weight: 700"
-            >品牌</van-tag
-          >
-          <b class="shops_title">嘉禾一品(温都水城)</b>
-        </template>
-        <template #tags>
-          <div style="margin-top: 18px">
-            <van-rate
-              v-model="value"
-              allow-half
-              color="#FF992D"
-              readonly
-              size="14"
-            />
-            <span>4.7</span>
-            <span>月售755单</span>
-          </div>
-        </template>
-        <template #price>
-          <div>
-            <span>¥20起送/配送费约¥5</span>
-          </div>
-        </template>
-      </van-card>
+      </template>
+      
     </div>
     <div class="amap-page-container">
       <el-amap vid="amap" :plugin="plugin" class="amap-demo" :center="center">
@@ -122,16 +86,8 @@ export default {
     return {
       positionAddress: "",
       value: 4,
-      gridData: [
-        { text: "甜品饮品" },
-        { text: "商超便利" },
-        { text: "美食" },
-        { text: "简餐" },
-        { text: "新店特惠" },
-        { text: "准时达" },
-        { text: "预定早餐" },
-        { text: "土豪推荐" },
-      ],
+      gridData: [],
+      shopsData:null,
       center: [121.59996, 31.197646],
       lng: 0,
       lat: 0,
@@ -165,6 +121,29 @@ export default {
         },
       ],
     };
+  },
+  methods: {
+    //首页九宫格
+    getGrid(){
+      let _this = this;
+      this.$http.post("biz/queryBigCategory").then(res=>{
+        console.log(res);
+        _this.gridData = res.data;
+      })
+    },
+    //首页商家信息
+    getShopsData(){
+      let _this = this;
+      this.$http.get("biz/queryAllShopsInfo").then(res=>{
+        console.log(res.data);
+        this.shopsData = res.data;
+        
+      })
+    }
+  },
+  created() {
+    this.getGrid();
+    this.getShopsData()
   },
 };
 </script>

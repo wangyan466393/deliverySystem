@@ -6,9 +6,8 @@ import router from './router'
 import store from './store'
 import Vant from 'vant';
 import 'vant/lib/index.css';
-import axios from "axios"
 
-axios.defaults.baseURL="http://47.95.13.193:80/takeOutSystem-1.0-SNAPSHOT/";
+axios.defaults.baseURL="http://47.95.13.193/takeOutSystem-1.0-SNAPSHOT";
 Vue.prototype.$http = axios;
 
 Vue.use(Vant);
